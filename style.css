@@ -1,0 +1,113 @@
+* {
+  font-family: "Poiret One", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  margin: 0%;
+  padding: 0%;
+  color: white;
+  scroll-behavior: smooth;
+}
+
+#loading{
+
+    display: block;
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+    border: white 10px solid;
+    animation-name: laodingScreen; 
+    animation-duration: 300ms;
+    animation-iteration-count: infinite;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes laodingScreen {
+    0%{
+            border: white 10px solid;
+            border-top: cyan 10px solid;
+    }    
+    25%{
+            border: white 10px solid;
+            border-right: cyan 10px solid;
+    }    
+    50%{
+            border: white 10px solid;
+            border-bottom: cyan 10px solid;
+    }    
+    75%{
+            border: white 10px solid;
+            border-left: cyan 10px solid;
+    } 
+    100% {
+            border: white 10px solid;
+            border-top: cyan 10px solid;
+    }
+}
+
+main {
+    transition: 500ms;
+    opacity: 0%;
+    color: white;
+    font-size: 20px;
+    margin-left: -20%;
+    padding-top: 16%;
+    padding-bottom: 15%;
+
+}
+
+main h1 {
+    font-size: 100px;
+}
+
+body {
+    background-position: 40%;
+    height: 100vh;
+    background-repeat: no-repeat;
+    transition: 500ms;    
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#Wtoday {
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.212);
+    border-radius: 30px;
+    width: 80%;
+    height: 15%;
+    opacity: 0%;
+    transition: 1000ms;    
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
+        overflow-y: hidden;
+    padding: 5%;
+}
+
+#Wtoday div {
+    width: 100px !important;
+    text-align: center;
+    white-space: nowrap;
+    padding: 5%;
+    position: relative;
+}
+
+#Wtoday p {
+
+    transform: translate(-50%, -300%);
+}
+
+#Wweek {
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.212);
+    border-radius: 30px;
+    margin-top: 5%;
+    width: 90%;
+    height: 55%;
+    opacity: 0%;
+    transition: 1000ms;    
+}
