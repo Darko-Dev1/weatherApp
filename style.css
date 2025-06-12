@@ -56,6 +56,11 @@ main {
     padding-top: 16%;
     padding-bottom: 15%;
 
+
+}
+#today {
+    transform: translate(0%, 130%);
+    z-index: 10000;
 }
 
 main h1 {
@@ -84,11 +89,18 @@ body {
     display: flex;
     align-items: center;
     overflow-x: auto;
-        overflow-y: hidden;
+    overflow-y: hidden;
     padding: 5%;
 }
 
+#Wtoday::-webkit-scrollbar {
+    opacity: 0%;
+}
+
+
+
 #Wtoday div {
+    margin-top: 5%;
     width: 100px !important;
     text-align: center;
     white-space: nowrap;

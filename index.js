@@ -1,4 +1,4 @@
-backgroundIMG = ["https://crownpointecommunities.com/wp-content/uploads/2017/06/sky-sunny-clouds-cloudy-scaled.jpg", "https://images.report.az/photo/72fc9b61-097b-3493-bb81-e5478bb5c310_850.jpeg", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpQvV4WqSJ4sm5snDOi0ysIG1-bEmAmH6Nsg&s", "https://images.pexels.com/photos/436792/pexels-photo-436792.jpeg?cs=srgb&dl=pexels-dan-hamill-144328-436792.jpg&fm=jpg"]
+backgroundIMG = ["https://crownpointecommunities.com/wp-content/uploads/2017/06/sky-sunny-clouds-cloudy-scaled.jpg", "https://images.pexels.com/photos/2682122/pexels-photo-2682122.jpeg", "https://images.pexels.com/photos/391522/pexels-photo-391522.jpeg", "https://images.pexels.com/photos/436792/pexels-photo-436792.jpeg?cs=srgb&dl=pexels-dan-hamill-144328-436792.jpg&fm=jpg"]
   let conthour = 0
   let srue = 0
 async function gettingWeather() {
@@ -31,9 +31,9 @@ async function gettingWeather() {
         minutes = "0"+minutes
       }
       document.querySelector("h1").innerText = `${a["hourly"]["temperature_2m"][indexTemp]}${a["hourly_units"]["temperature_2m"]}` 
-      if(a["hourly"]["temperature_2m"][indexTemp] < 12) {
+      if(a["hourly"]["temperature_2m"][indexTemp] < 12 && a["hourly"]["temperature_2m"][indexTemp] > 0 ) {
         document.querySelector("h4").innerText = `Feels chill ${hour}:${minutes}`
-        document.querySelector("body").style.backgroundImage = `url(${backgroundIMG[2]})`
+        document.querySelector("body").style.backgroundImage = `url(${backgroundIMG[1]})`
       } else if (a["hourly"]["temperature_2m"][indexTemp] < 0){
         document.querySelector("h4").innerText = `Feels cold ${hour}:${minutes}`
         document.querySelector("body").style.backgroundImage = `url(${backgroundIMG[3]})`
@@ -42,7 +42,7 @@ async function gettingWeather() {
         document.querySelector("body").style.backgroundImage = `url(${backgroundIMG[0]})`
       } else {
         document.querySelector("h4").innerText = `Feels okay ${hour}:${minutes}`
-        document.querySelector("body").style.backgroundImage = `url(${backgroundIMG[1]})`
+        document.querySelector("body").style.backgroundImage = `url(${backgroundIMG[2]})`
       }
       const Wtoday = document.getElementById("Wtoday")
       while(hour+conthour <= 23) {
