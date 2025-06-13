@@ -23,8 +23,8 @@ async function gettingWeather() {
   document.querySelector("#Wtoday").style.opacity = "100%"
   setInterval( () => {  const date = new Date(); minutes = date.getMinutes();   let hour = date.getHours();   const year = date.getFullYear();   const month = date.getMonth() + 1;   const day = date.getDate();       
     let fullDate = `${year}-0${month}-${day}T${hour}:00`;
-    
-    if (hour.toString.length < 2) {
+
+    if (hour.toString().length < 2) {
       fullDate = `${year}-0${month}-${day}T0${hour}:00`;
     }else {
       fullDate = `${year}-0${month}-${day}T${hour}:00`;
@@ -81,7 +81,7 @@ async function gettingWeather() {
 
 setTimeout(a => {
   gettingWeather()
-}, 2000)
+}, 500)
 
 
 
