@@ -56,7 +56,6 @@ main {
     padding-top: 16%;
     padding-bottom: 15%;
 
-
 }
 #today {
     transform: translate(0%, 8vw);
@@ -137,8 +136,6 @@ body {
     transition: 1000ms;    
     display: flex;
     flex-direction: column;
-    overflow-x: auto;
-    overflow-y: hidden;
     padding: 5%;
 
 }
