@@ -56,7 +56,12 @@ async function gettingWeather() {
         conthour++
         hoursLeft.push(a["hourly"]["time"].indexOf(`${year}-0${month}-${day}T${hour+conthour}:00`))
         let createDay = document.createElement("div")
-        createDay.innerHTML = `${a["hourly"]["temperature_2m"][hour+conthour]}${a["hourly_units"]["temperature_2m"]} <br> ${hour + conthour} : 00`
+        if (hour + conthour > 22) {
+          createDay.innerHTML = `<h4>${a["hourly"]["temperature_2m"][hour+conthour]}${a["hourly_units"]["temperature_2m"]}</h4></p> <br> <svg stroke="currentColor" fill="yellow" stroke-width="0" viewBox="0 0 512 512" height="1em" width="100%" xmlns="http://www.w3.org/2000/svg"><path d="M283.211 512c78.962 0 151.079-35.925 198.857-94.792 7.068-8.708-.639-21.43-11.562-19.35-124.203 23.654-238.262-71.576-238.262-196.954 0-72.222 38.662-138.635 101.498-174.394 9.686-5.512 7.25-20.197-3.756-22.23A258.156 258.156 0 0 0 283.211 0c-141.309 0-256 114.511-256 256 0 141.309 114.511 256 256 256z"></path></svg> <br> ${hour + conthour} : 00`
+        }else {
+          createDay.innerHTML = `<h4>${a["hourly"]["temperature_2m"][hour+conthour]}${a["hourly_units"]["temperature_2m"]}</h4></p> <br> <svg stroke="currentColor" fill="yellow" stroke-width="0" viewBox="0 0 24 24" height="1em" width="100%" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"></path><path d="M11 4V2c0-.55.45-1 1-1s1 .45 1 1v2c0 .55-.45 1-1 1s-1-.45-1-1zm7.36 3.05 1.41-1.42a.996.996 0 1 0-1.41-1.41l-1.41 1.42a.996.996 0 1 0 1.41 1.41zM22 11h-2c-.55 0-1 .45-1 1s.45 1 1 1h2c.55 0 1-.45 1-1s-.45-1-1-1zm-10 8c-.55 0-1 .45-1 1v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1zM5.64 7.05 4.22 5.64c-.39-.39-.39-1.03 0-1.41s1.03-.39 1.41 0l1.41 1.41c.39.39.39 1.03 0 1.41s-1.02.39-1.4 0zm11.31 9.9a.996.996 0 0 0 0 1.41l1.41 1.41c.39.39 1.03.39 1.41 0a.996.996 0 0 0 0-1.41l-1.41-1.41a.996.996 0 0 0-1.41 0zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm3.64 6.78 1.41-1.41c.39-.39.39-1.03 0-1.41s-1.03-.39-1.41 0l-1.41 1.41a.996.996 0 0 0 0 1.41c.38.39 1.02.39 1.41 0zM12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6z"></path></svg> <br> ${hour + conthour} : 00`
+        }
+         
         document.querySelector("#Wtoday").appendChild(createDay)
         if (hour+conthour === 24) {
           hoursLeft.pop()

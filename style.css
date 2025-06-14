@@ -100,13 +100,22 @@ body {
 
 
 #Wtoday div {
-    margin-top: 5%;
+
+    margin-top: 6%;
     width: 100px !important;
     text-align: center;
     white-space: nowrap;
-    padding: 5%;
+    padding: 4%;
     position: relative;
-    border-right: 2px solid white;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid white;
+    justify-content: center;
+}
+#Wtoday div svg {
+    position: relative;
+    text-align: center;
+
 }
 
 #Wtoday p {
