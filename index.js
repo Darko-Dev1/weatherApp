@@ -21,6 +21,8 @@ async function gettingWeather() {
   document.querySelector("main").style.opacity = "100%"
   document.querySelector("#Wweek").style.opacity = "100%"
   document.querySelector("#Wtoday").style.opacity = "100%"
+  let Wweek = document.querySelector("#Wweek")
+  let weekDayC = 0 
   setInterval( () => {  const date = new Date(); minutes = date.getMinutes();   let hour = date.getHours();   const year = date.getFullYear();   const month = date.getMonth() + 1;   const day = date.getDate();       
     let fullDate = `${year}-0${month}-${day}T${hour}:00`;
 
@@ -68,14 +70,48 @@ async function gettingWeather() {
           console.log(hoursLeft)
           break
         }
-
       }
 
+      let keepCountindex = []
+      if( weekDayC < 8) {
+        for (i of daysOfTheWeek) {
+          if (weekDayC < 7) {
+            let wdiv = document.createElement("div")
 
+            wdiv.setAttribute("class", "wdivs")
+
+            let keepingCountt = a["hourly"]["time"].indexOf(`${year}-0${month}-${day+weekDayC}T${12}:00`)
+            let newday = new Date(`${year}-0${month}-${day+weekDayC}`)
+            let wp = document.createElement("h3")
+            wp.innerHTML = `${daysOfTheWeek[newday.getDay()]}: `
+
+            keepCountindex.push(keepingCountt)
+            let tempchild = document.createElement("div")
+            tempchild.innerHTML = a["hourly"]["temperature_2m"][keepCountindex[weekDayC]]
+            wdiv.appendChild(wp)
+            if (month.toString().length < 2) {
+              wdiv.innerHTML += `<h3>0${month}-${day+weekDayC}`
+            }  else {
+              wdiv.innerHTML = `<h3>${month}-${day+weekDayC}`
+            }
+            wdiv.appendChild(tempchild)
+            Wweek.appendChild(wdiv)
+            weekDayC++
+          } else {
+            return
+          }
+         
+          console.log(keepCountindex)
+        }
+      }
+
+      
+      
     } else {
       console.error("something went wrong")
     }
   }, 500)
+  
   
   console.log(hoursLeft)
 

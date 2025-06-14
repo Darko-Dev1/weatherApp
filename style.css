@@ -59,8 +59,9 @@ main {
 
 }
 #today {
-    transform: translate(0%, 130%);
+    transform: translate(0%, 8vw);
     z-index: 10000;
+
 }
 
 main h1 {
@@ -83,7 +84,6 @@ body {
     background-color: rgba(0, 0, 0, 0.212);
     border-radius: 30px;
     width: 80%;
-    height: 15%;
     opacity: 0%;
     transition: 1000ms;    
     display: flex;
@@ -91,7 +91,10 @@ body {
     overflow-x: auto;
     overflow-y: hidden;
     padding: 5%;
+    padding-top: 10%;
 }
+
+
 
 #Wtoday::-webkit-scrollbar {
     opacity: 0%;
@@ -109,7 +112,7 @@ body {
     position: relative;
     display: flex;
     flex-direction: column;
-    border-right: 1px solid white;
+    border-right: 0.2px solid rgba(255, 255, 255, 0.332);
     justify-content: center;
 }
 #Wtoday div svg {
@@ -124,12 +127,25 @@ body {
 }
 
 #Wweek {
+    margin-top: 5%;
+    transition: 1000ms; 
     position: relative;
     background-color: rgba(0, 0, 0, 0.212);
     border-radius: 30px;
-    margin-top: 5%;
-    width: 90%;
-
+    width: 80%;
     opacity: 0%;
     transition: 1000ms;    
+    display: flex;
+    flex-direction: column;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 5%;
+
+}
+
+.wdivs {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 3%;
+
 }
