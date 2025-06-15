@@ -69,7 +69,6 @@ main h1 {
 
 body {
     background-position: 40%;
-    height: 100vh;
     background-repeat: no-repeat;
     transition: 500ms;    
     backdrop-filter: blur(10px);
@@ -84,6 +83,7 @@ body {
     border-radius: 30px;
     width: 80%;
     opacity: 0%;
+
     transition: 1000ms;    
     display: flex;
     align-items: center;
@@ -145,4 +145,12 @@ body {
     justify-content: space-evenly;
     padding: 3%;
 
+}
+
+footer {
+    padding-top: 50px;
+    backdrop-filter: blur(50px);
+    width: 100%;
+    color: rgb(0, 0, 0);
+    text-align: center;
 }
