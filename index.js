@@ -16,7 +16,8 @@ async function gettingWeather() {
 
   const date = new Date();
   let hoursLeft = []
-  document.getElementById("today").innerText += ":  " + daysOfTheWeek[date.getDay()] + " " + date.getDate() + "/" + date.getMonth()
+  let actualMonth = date.getMonth() + 1
+  document.getElementById("today").innerText += ":  " + daysOfTheWeek[date.getDay()] + " " + date.getDate() + "/" + actualMonth
   document.getElementById("loading").style.display = "none"
   document.querySelector("main").style.opacity = "100%"
   document.querySelector("#Wweek").style.opacity = "100%"
