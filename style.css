@@ -151,6 +151,9 @@ body::-webkit-scrollbar {
     border-bottom: rgba(255, 255, 255, 0.356) 1px solid;
 
 }
+.wdivs div:nth-child(0) {
+    background-color: aquamarine;
+}
 
 header {
     display: flex;
@@ -170,7 +173,30 @@ header {
 
 .wdivs div {
     text-align: center;
+    display: flex;
+    width: 50%;
 }
+
+.wdivs div div {
+    width: 50%;
+    display: flex;
+    white-space: nowrap;
+    padding: 2%;
+    flex-direction: column;
+    text-align: center;
+}
+
+.wdivs div div:nth-child(1) {
+    border-right: white 1px solid;
+
+
+}
+
+.wdivs div div:nth-child(2) svg{
+    padding-top: 5%;
+
+}
+
 
 
 footer {
