@@ -235,7 +235,7 @@ footer {
     align-items: center;
 }
 
-@media (min-width:1024px) {
+@media (min-width:768px) {
     main {
         width: 100%;
         display: flex;
@@ -293,5 +293,8 @@ footer {
         padding-bottom: 15%;
         transition: 500ms;
 
+    }
+    #today {
+        transform: translate(0px, 150%);
     }
 }
