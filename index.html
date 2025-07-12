@@ -11,20 +11,26 @@
 </head> 
 <body style="background-size: cover;">
 
-    <header><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 384 512" height="2em" width="2em" xmlns="http://www.w3.org/2000/svg"><path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"></path></svg><h2>Germany, Frankfurt</h5></header>
+    <header><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 384 512" height="2em" width="2em" xmlns="http://www.w3.org/2000/svg"><path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"></path></svg><h2>Germany, Frankfurt</h5>
+        <svg id="deskMode" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 576 512" height="200px" width="200px" xmlns="http://www.w3.org/2000/svg"><path d="M528 0H48C21.5 0 0 21.5 0 48v320c0 26.5 21.5 48 48 48h192l-16 48h-72c-13.3 0-24 10.7-24 24s10.7 24 24 24h272c13.3 0 24-10.7 24-24s-10.7-24-24-24h-72l-16-48h192c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-16 352H64V64h448v288z"></path><title id="cinematic">Cinematic view</title></svg>
+    </header>
     <div id="loading"></div>
-    <main>
-        <h3>Germany, Frankfurt</h3>
-        <h1></h1>
-        <h4></h4>
-    </main>
-    <p id="today">today</p>
-    <div id="Wtoday">
+    <div class="Desktop">
+        <main>
+            <h3>Germany, Frankfurt</h3>
+            <h1></h1>
+            <h4></h4>
+        </main>
+        <div class="DesktopMode">
+            <p id="today">today</p>
+            <div id="Wtoday">
+            </div>
+            <div id="Wweek">
+                <p>Following week:</p>
+            </div>
+        </div>
     </div>
-    <div id="Wweek">
-        <p>Following week:</p>
-    </div>
-    <footer>made by Darko-dev1</footer>
+    <footer onclick="window.open('https://github.com/Darko-Dev1', '_blank')">made by Darko-dev1</footer>
 
     <script src="index.js"></script>
 </body>

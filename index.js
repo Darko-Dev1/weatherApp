@@ -199,6 +199,20 @@ document.addEventListener("scroll", (e) => {
   }
 })
 
+const trigger = document.querySelector(".Desktop")
+const cinemati = document.getElementById("cinematic")
+const triggerChild = document.querySelector(".DesktopMode")
+deskMode.addEventListener("click", ()=> {
+  console.log(trigger.classList.toString())
+  if (trigger.classList.toString() !== "") {
+      trigger.classList.remove("Desktop")
+      cinemati.innerHTML = "Desktop Mode"
+      console.log(cinemati)
+  } else {
+    trigger.classList.add("Desktop")
+    cinemati.innerHTML = "Cinematic view"
+  }
+})
 
 
 
