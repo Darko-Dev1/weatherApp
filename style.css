@@ -75,9 +75,10 @@ main h1 {
 
 }
 
+
+
 body {
-    background-position: 40%;
-    background-size: cover;
+    background-size: cover !important;
     background-repeat: no-repeat;
     transition: 500ms;
     backdrop-filter: blur(10px);
@@ -235,14 +236,15 @@ footer {
     align-items: center;
 }
 
-@media (min-width:768px) {
+
+@media (min-width:1000px) {
     main {
         width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
         margin: 0%;
-        height: 40vh;
+        height: 70vh;
         user-select: none;
 
     }
@@ -250,6 +252,14 @@ footer {
     main h1 {
         font-size: 130px;
 
+    }
+
+    #today {
+        transform: translate(0px, 150%);
+    }
+
+    .Desktop .DesktopMode {
+        width: 700px;
     }
 
     #deskMode {
@@ -264,9 +274,13 @@ footer {
         fill: gray;
     }
 
+    #Wtoday {
+        overflow-x: auto;
+    }
+
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
     .Desktop {
         display: flex;
         flex-direction: column;
@@ -294,6 +308,7 @@ footer {
         transition: 500ms;
 
     }
+
     #today {
         transform: translate(0px, 150%);
     }

@@ -38,7 +38,7 @@ async function gettingWeather() {
         minutes = "0" + minutes
       }
       document.querySelector("h1").innerText = `${a["hourly"]["temperature_2m"][indexTemp]}${a["hourly_units"]["temperature_2m"]}`
-      if (hour < 21 || hour > 5) {
+      if (hour > 5 && hour < 21) {
         if (a["hourly"]["temperature_2m"][indexTemp] < 12 && a["hourly"]["temperature_2m"][indexTemp] > 0) {
           document.querySelector("h4").innerText = `Feels chill at ${hour}:${minutes}`
           document.querySelector("body").style.backgroundImage = `url(${backgroundIMG[1]})`
