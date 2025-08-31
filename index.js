@@ -26,7 +26,7 @@ async function gettingWeather() {
   );
   let a = await Weather.json();
   try {
-    console.log(a);
+    console.log("connected");
   } catch {
     console.error("no work");
   }
@@ -171,7 +171,7 @@ async function gettingWeather() {
         document.querySelector("#Wtoday").appendChild(createDay);
         if (hour + conthour === 24) {
           hoursLeft.pop();
-          console.log(hoursLeft);
+          // console.log(hoursLeft);
           break;
         }
       }
@@ -213,20 +213,20 @@ async function gettingWeather() {
                     `${year}-0${month + 1}-0${day + weekDayC}T${23}:00`
                   );
                 }
-                console.log(month + 1);
-                console.log(day + weekDayC);
-                console.log(`${year}-0${month + 1}-${day + weekDayC}T${12}:00`);
-                console.log(
-                  keepingCountt,
-                  " ",
-                  a["hourly"]["temperature_2m"][keepCountindex[weekDayC]]
-                );
+                // console.log(month + 1);
+                // console.log(day + weekDayC);
+                // console.log(`${year}-0${month + 1}-${day + weekDayC}T${12}:00`);
+                // console.log(
+                //   keepingCountt,
+                //   " ",
+                //   a["hourly"]["temperature_2m"][keepCountindex[weekDayC]]
+                // );
                 wp.innerHTML = `Tomorrow: `;
 
                 keepCountindex.push(keepingCountt);
                 keepingCounttNightindex.push(keepingCounttNight);
                 let tempchild = document.createElement("div");
-                console.log(keepingCountt);
+                // console.log(keepingCountt);
                 tempchild.innerHTML = `<div>${
                   a["hourly"]["temperature_2m"][keepingCountt]
                 } ${
@@ -249,10 +249,12 @@ async function gettingWeather() {
                     day + weekDayC
                   } </h5>`;
                 }
+
+                
                 wdiv.appendChild(tempchild);
                 Wweek.appendChild(wdiv);
                 weekDayC++;
-                console.log("dasdsada" + keepCountindex);
+                // console.log("dasdsada" + keepCountindex);
               } else {
                 wp.innerHTML = `Tomorrow: `;
 
@@ -375,8 +377,6 @@ async function gettingWeather() {
             } else {
               let wdiv = document.createElement("div");
               wdiv.setAttribute("class", "wdivs");
-
-              console.log("eehh");
               let keepingCountt = a["hourly"]["time"].indexOf(
                 `${year}-0${month}-${day + weekDayC}T${12}:00`
               );
@@ -403,7 +403,7 @@ async function gettingWeather() {
                     `${year}-0${month + 1}-0${day + weekDayC}T${23}:00`
                   );
                 }
-                console.log(keepingCounttNightindex);
+                // console.log(keepingCounttNightindex);
 
                 keepCountindex.push(keepingCountt);
                 keepingCounttNightindex.push(keepingCounttNight);
@@ -433,7 +433,7 @@ async function gettingWeather() {
                 Wweek.appendChild(wdiv);
                 weekDayC++;
               } else {
-                console.log(keepingCounttNightindex);
+                // console.log(keepingCounttNightindex);
 
                 keepCountindex.push(keepingCountt);
                 keepingCounttNightindex.push(keepingCounttNight);
@@ -468,7 +468,7 @@ async function gettingWeather() {
             return;
           }
 
-          console.log(keepCountindex);
+          // console.log(keepCountindex);
         }
       }
     } else {
@@ -476,7 +476,7 @@ async function gettingWeather() {
     }
   }, 500);
 
-  console.log(hoursLeft);
+  // console.log(hoursLeft);
 }
 
 document.addEventListener("scroll", (e) => {
