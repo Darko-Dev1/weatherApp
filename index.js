@@ -385,10 +385,11 @@ async function gettingWeather() {
                           let wp = document.createElement("h3");
                       if (keepingCountt === -1) {
 
-                            day = 0;
+                            
                             newday = new Date(`${year}-0${month }-${day + weekDayC}`);
+                            console.log(newday)
                             keepingCountt = a["hourly"]["time"].indexOf(
-                              `${year}-0${month}-0${day + weekDayC+ 3}T${12}:00`
+                              `${year}-0${month}-0${day + weekDayC}T${12}:00`
                             );
                            
                             keepingCounttNight = a["hourly"]["time"].indexOf(
@@ -396,7 +397,7 @@ async function gettingWeather() {
                             );
                             if (keepingCounttNight === -1) {
                               keepingCounttNight = a["hourly"]["time"].indexOf(
-                                `${year}-0${month }-0${day + weekDayC+ 1}T${23}:00`
+                                `${year}-0${month }-0${day + weekDayC}T${23}:00`
                               );
                               console.log(day + weekDayC+ 1)
                              
@@ -427,26 +428,27 @@ async function gettingWeather() {
                               if (newday.getDay()+ 1 > 7) {
                                 wp.innerHTML = `${daysOfTheWeek[0]}: <h5>0${
                                 month
-                              }-${day + weekDayC +2}</h5>`;
+                              }-${day + weekDayC}</h5>`;
                                 
                               } else {
-                                wp.innerHTML = `${daysOfTheWeek[(newday.getDay()+3) % 7] }: <h5>0${
+                                wp.innerHTML = `${daysOfTheWeek[(newday.getDay()) % 7] }: <h5>0${
                                 month
-                              }-${day + weekDayC +3}</h5>`;
+                              }-${day + weekDayC}</h5>`;
                               
                               }
+                              console.log(daysOfTheWeek[(newday.getDay()) % 7])
                               
 
                             } else {
                                 if (newday.getDay()+ 1 > 7) {
                                 wp.innerHTML = `${daysOfTheWeek[0]}: <h5>0${
                                 month
-                              }-${day + weekDayC +4}</h5>`;
+                              }-${day + weekDayC}</h5>`;
                                 
                               } else {
-                                  wp.innerHTML = `${daysOfTheWeek[(newday.getDay()+3) % 7] }: <h5>0${
+                                  wp.innerHTML = `${daysOfTheWeek[(newday.getDay()) % 7] }: <h5>0${
                                   month
-                                }-${day + weekDayC +4}</h5>`;
+                                }-${day + weekDayC}</h5>`;
 
                               }
 
@@ -486,6 +488,7 @@ async function gettingWeather() {
                             Wweek.appendChild(wdiv);
                             weekDayC++;
                           }
+                          console.log(daysOfTheWeek[newday.getDay()])
                 }
           } else {
             return;
