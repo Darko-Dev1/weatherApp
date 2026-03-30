@@ -20,6 +20,16 @@ let daysOfTheWeek = [
   "Friday",
   "Saturday",
 ];
+
+// Helper function to get date string with proper month/day handling
+function getDateString(year, month, day, daysToAdd) {
+  const d = new Date(year, month - 1, day + daysToAdd);
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const da = String(d.getDate()).padStart(2, "0");
+  return { year: y, month: parseInt(m), day: parseInt(da), monthStr: m, dayStr: da, dateStr: `${y}-${m}-${da}`, dateObj: d };
+}
+
 async function gettingWeather() {
   let Weather = await fetch(
     "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&hourly=temperature_2m&models=icon_seamless"
@@ -182,319 +192,58 @@ async function gettingWeather() {
       if (weekDayC < 8) {
         for (i of daysOfTheWeek) {
           if (weekDayC < 6) {
-            if (weekDayC === 1) {
-                  let wdiv = document.createElement("div");
-
-                  wdiv.setAttribute("class", "wdivs");
-
-                  let keepingCountt = a["hourly"]["time"].indexOf(
-                    `${year}-0${month}-${day + weekDayC}T${12}:00`
-                  );
-                  let keepingCounttNight = a["hourly"]["time"].indexOf(
-                    `${year}-0${month}-${day + weekDayC}T${23}:00`
-                  );
-                  let newday = new Date(`${year}-0${month}-${day + weekDayC}`);
-                  let wp = document.createElement("h3");
-              if (keepingCountt === -1) {
-                    newday = new Date(`${year}-0${month }-${day + weekDayC}`);
-
-                    if (keepingCountt === -1) {
-                      keepingCountt = a["hourly"]["time"].indexOf(
-                        `${year}-0${month }-0${day + weekDayC}T${12}:00`
-                      );
-                      console.log(day + weekDayC)
-                    }
-                    if (keepingCounttNight === -1) {
-                      keepingCounttNight = a["hourly"]["time"].indexOf(
-                        `${year}-0${month }-0${day + weekDayC + 3}T${23}:00`
-                      );
-                    }
-                    // console.log(month + 1);
-                    // console.log(day + weekDayC);
-                    // console.log(`${year}-0${month + 1}-${day + weekDayC}T${12}:00`);
-                    // console.log(
-                    //   keepingCountt,
-                    //   " ",
-                    //   a["hourly"]["temperature_2m"][keepCountindex[weekDayC]]
-                    // );
-                    wp.innerHTML = `Tomorrow: `;
-
-                    keepCountindex.push(keepingCountt);
-                    keepingCounttNightindex.push(keepingCounttNight);
-                    let tempchild = document.createElement("div");
-                    // console.log(keepingCountt);
-                    tempchild.innerHTML = `<div>${
-                      a["hourly"]["temperature_2m"][keepingCountt]
-                    } ${
-                      a["hourly_units"]["temperature_2m"]
-                    } <svg stroke="currentColor" fill="yellow" stroke-width="0" viewBox="0 0 24 24" height="2em" width="100%" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"></path><path d="M11 4V2c0-.55.45-1 1-1s1 .45 1 1v2c0 .55-.45 1-1 1s-1-.45-1-1zm7.36 3.05 1.41-1.42a.996.996 0 1 0-1.41-1.41l-1.41 1.42a.996.996 0 1 0 1.41 1.41zM22 11h-2c-.55 0-1 .45-1 1s.45 1 1 1h2c.55 0 1-.45 1-1s-.45-1-1-1zm-10 8c-.55 0-1 .45-1 1v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1zM5.64 7.05 4.22 5.64c-.39-.39-.39-1.03 0-1.41s1.03-.39 1.41 0l1.41 1.41c.39.39.39 1.03 0 1.41s-1.02.39-1.4 0zm11.31 9.9a.996.996 0 0 0 0 1.41l1.41 1.41c.39.39 1.03.39 1.41 0a.996.996 0 0 0 0-1.41l-1.41-1.41a.996.996 0 0 0-1.41 0zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm3.64 6.78 1.41-1.41c.39-.39.39-1.03 0-1.41s-1.03-.39-1.41 0l-1.41 1.41a.996.996 0 0 0 0 1.41c.38.39 1.02.39 1.41 0zM12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6z"></path></svg> </div><div>${
-                      a["hourly"]["temperature_2m"][
-                       keepCountindex[weekDayC]+12
-                      ]
-                    } ${
-                      a["hourly_units"]["temperature_2m"]
-                    } <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1.5em" width="100%" xmlns="http://www.w3.org/2000/svg"><path d="M283.211 512c78.962 0 151.079-35.925 198.857-94.792 7.068-8.708-.639-21.43-11.562-19.35-124.203 23.654-238.262-71.576-238.262-196.954 0-72.222 38.662-138.635 101.498-174.394 9.686-5.512 7.25-20.197-3.756-22.23A258.156 258.156 0 0 0 283.211 0c-141.309 0-256 114.511-256 256 0 141.309 114.511 256 256 256z"></path></svg> </div>`;
-                    console.log(                      a["hourly"]["temperature_2m"]
-
-                      )
-                    wdiv.appendChild(wp);
-                    if (month.toString().length < 2) {
-                      wp.innerHTML = `Tomorrow: <h5>0${month}-${
-                        day + weekDayC
-                      }</h5>`;
-                    } else {
-                      wp.innerHTML = `Tomorrow: <h5> ${month }-${
-                        day + weekDayC
-                      } </h5>`;
-                    }
-
-                    wdiv.appendChild(tempchild);
-                    Wweek.appendChild(wdiv);
-                    weekDayC++;
-                // console.log("dasdsada" + keepCountindex);
-              } else {
-                    wp.innerHTML = `Tomorrow: `;
-
-                    keepingCountt = a["hourly"]["time"].indexOf(
-                      `${year}-0${month }-${day + weekDayC}T${12}:00`
-                    );
-                    keepingCounttNight = a["hourly"]["time"].indexOf(
-                      `${year}-0${month }-${day + weekDayC}T${23}:00`
-                    );
-                    if (keepingCountt === -1) {
-                      keepingCountt = a["hourly"]["time"].indexOf(
-                        `${year}-0${month }-0${day + weekDayC}T${12}:00`
-                      );
-                    }
-                    if (keepingCounttNight === -1) {
-                      keepingCounttNight = a["hourly"]["time"].indexOf(
-                        `${year}-0${month }-0${day + weekDayC}T${23}:00`
-                      );
-                    }
-                    keepCountindex.push(keepingCountt);
-                    keepingCounttNightindex.push(keepingCounttNight);
-                    let tempchild = document.createElement("div");
-
-                    tempchild.innerHTML = `<div>${
-                      a["hourly"]["temperature_2m"][keepCountindex[weekDayC]]
-                    } ${
-                      a["hourly_units"]["temperature_2m"]
-                    } <svg stroke="currentColor" fill="yellow" stroke-width="0" viewBox="0 0 24 24" height="2em" width="100%" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"></path><path d="M11 4V2c0-.55.45-1 1-1s1 .45 1 1v2c0 .55-.45 1-1 1s-1-.45-1-1zm7.36 3.05 1.41-1.42a.996.996 0 1 0-1.41-1.41l-1.41 1.42a.996.996 0 1 0 1.41 1.41zM22 11h-2c-.55 0-1 .45-1 1s.45 1 1 1h2c.55 0 1-.45 1-1s-.45-1-1-1zm-10 8c-.55 0-1 .45-1 1v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1zM5.64 7.05 4.22 5.64c-.39-.39-.39-1.03 0-1.41s1.03-.39 1.41 0l1.41 1.41c.39.39.39 1.03 0 1.41s-1.02.39-1.4 0zm11.31 9.9a.996.996 0 0 0 0 1.41l1.41 1.41c.39.39 1.03.39 1.41 0a.996.996 0 0 0 0-1.41l-1.41-1.41a.996.996 0 0 0-1.41 0zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm3.64 6.78 1.41-1.41c.39-.39.39-1.03 0-1.41s-1.03-.39-1.41 0l-1.41 1.41a.996.996 0 0 0 0 1.41c.38.39 1.02.39 1.41 0zM12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6z"></path></svg> </div><div>${
-                      a["hourly"]["temperature_2m"][
-                        keepingCounttNightindex[weekDayC]
-                      ]
-                    } ${
-                      a["hourly_units"]["temperature_2m"]
-                    } <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1.5em" width="100%" xmlns="http://www.w3.org/2000/svg"><path d="M283.211 512c78.962 0 151.079-35.925 198.857-94.792 7.068-8.708-.639-21.43-11.562-19.35-124.203 23.654-238.262-71.576-238.262-196.954 0-72.222 38.662-138.635 101.498-174.394 9.686-5.512 7.25-20.197-3.756-22.23A258.156 258.156 0 0 0 283.211 0c-141.309 0-256 114.511-256 256 0 141.309 114.511 256 256 256z"></path></svg> </div>`;
-
-                    wdiv.appendChild(wp);
-                    if (month.toString().length < 2) {
-                      wp.innerHTML = `Tomorrow: <h5>0${month}-${
-                        day + weekDayC
-                      }</h5>`;
-                    } else {
-                      wp.innerHTML = `Tomorrow: <h5> ${month}-${
-                        day + weekDayC
-                      } </h5>`;
-                    }
-                    wdiv.appendChild(tempchild);
-                    Wweek.appendChild(wdiv);
-                    weekDayC++;
-                  }
-            } else if (weekDayC === 0) {
-                  let wdiv = document.createElement("div");
-
-                  wdiv.setAttribute("class", "wdivs");
-                  console.log(day + weekDayC)
-                  let keepingCountt = a["hourly"]["time"].indexOf(
-                    `${year}-0${month}-${day + weekDayC}T${12}:00`
-                  );
-                  let keepingCounttNight = a["hourly"]["time"].indexOf(
-                    `${year}-0${month}-${day + weekDayC}T${23}:00`
-                  );
-                  let newday = new Date(`${year}-0${month}-${day + weekDayC}`);
-                  let wp = document.createElement("h3");
+            let dateObj = getDateString(year, month, day, weekDayC);
+            let keepingCountt = a["hourly"]["time"].indexOf(
+              `${dateObj.dateStr}T12:00`
+            );
+            let keepingCounttNight = a["hourly"]["time"].indexOf(
+              `${dateObj.dateStr}T23:00`
+            );
+            
+            let wdiv = document.createElement("div");
+            wdiv.setAttribute("class", "wdivs");
+            let wp = document.createElement("h3");
+            
+            if (keepingCountt === -1 || keepingCounttNight === -1) {
+              // Try without leading zeros for day/month
+              const dayPadded = String(dateObj.day).padStart(2, "0");
+              const monthPadded = String(dateObj.month).padStart(2, "0");
+              const dateCheck = `${dateObj.year}-${monthPadded}-${dayPadded}T`;
               
               if (keepingCountt === -1) {
-                      newday = new Date(`${year}-0${month }-${day + weekDayC}`);
-                      keepingCountt = a["hourly"]["time"].indexOf(
-                        `${year}-0${month }-0${day + weekDayC}T${12}:00`
-                      );
-                      keepingCounttNight = a["hourly"]["time"].indexOf(
-                      `${year}-0${month}-0${day + weekDayC}T${23}:00`
-                      );
-                      keepCountindex.push(keepingCountt);
-                      keepingCounttNightindex.push(keepingCounttNight);
-                      let tempchild = document.createElement("div");
-                      console.log(keepingCountt)
-                      tempchild.innerHTML = `<div>${
-                        a["hourly"]["temperature_2m"][keepingCountt]
-                      } ${
-                        a["hourly_units"]["temperature_2m"]
-                      } <svg stroke="currentColor" fill="yellow" stroke-width="0" viewBox="0 0 24 24" height="2em" width="100%" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"></path><path d="M11 4V2c0-.55.45-1 1-1s1 .45 1 1v2c0 .55-.45 1-1 1s-1-.45-1-1zm7.36 3.05 1.41-1.42a.996.996 0 1 0-1.41-1.41l-1.41 1.42a.996.996 0 1 0 1.41 1.41zM22 11h-2c-.55 0-1 .45-1 1s.45 1 1 1h2c.55 0 1-.45 1-1s-.45-1-1-1zm-10 8c-.55 0-1 .45-1 1v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1zM5.64 7.05 4.22 5.64c-.39-.39-.39-1.03 0-1.41s1.03-.39 1.41 0l1.41 1.41c.39.39.39 1.03 0 1.41s-1.02.39-1.4 0zm11.31 9.9a.996.996 0 0 0 0 1.41l1.41 1.41c.39.39 1.03.39 1.41 0a.996.996 0 0 0 0-1.41l-1.41-1.41a.996.996 0 0 0-1.41 0zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm3.64 6.78 1.41-1.41c.39-.39.39-1.03 0-1.41s-1.03-.39-1.41 0l-1.41 1.41a.996.996 0 0 0 0 1.41c.38.39 1.02.39 1.41 0zM12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6z"></path></svg> </div><div>${
-                        a["hourly"]["temperature_2m"][
-                          keepingCounttNightindex[weekDayC]
-                        ]
-                      } ${
-                        a["hourly_units"]["temperature_2m"]
-                      } <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1.5em" width="100%" xmlns="http://www.w3.org/2000/svg"><path d="M283.211 512c78.962 0 151.079-35.925 198.857-94.792 7.068-8.708-.639-21.43-11.562-19.35-124.203 23.654-238.262-71.576-238.262-196.954 0-72.222 38.662-138.635 101.498-174.394 9.686-5.512 7.25-20.197-3.756-22.23A258.156 258.156 0 0 0 283.211 0c-141.309 0-256 114.511-256 256 0 141.309 114.511 256 256 256z"></path></svg> </div>`;
-                      wdiv.appendChild(wp);
-                      if (month.toString().length < 2) {
-                        wp.innerHTML = `Today: <h5>0${month}-${day + weekDayC}</h5>`;
-                      } else {
-                        wp.innerHTML = `Today: <h5> ${month}-${day + weekDayC} </h5>`;
-                      }
-                      wdiv.appendChild(tempchild);
-                      Wweek.appendChild(wdiv);
-                      weekDayC++;
-              } else {
-                    keepCountindex.push(keepingCountt);
-                    keepingCounttNightindex.push(keepingCounttNight);
-                    let tempchild = document.createElement("div");
-                    tempchild.innerHTML = tempchild.innerHTML = `<div>${
-                      a["hourly"]["temperature_2m"][keepingCountt]
-                    } ${
-                      a["hourly_units"]["temperature_2m"]
-                    } <svg stroke="currentColor" fill="yellow" stroke-width="0" viewBox="0 0 24 24" height="2em" width="100%" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"></path><path d="M11 4V2c0-.55.45-1 1-1s1 .45 1 1v2c0 .55-.45 1-1 1s-1-.45-1-1zm7.36 3.05 1.41-1.42a.996.996 0 1 0-1.41-1.41l-1.41 1.42a.996.996 0 1 0 1.41 1.41zM22 11h-2c-.55 0-1 .45-1 1s.45 1 1 1h2c.55 0 1-.45 1-1s-.45-1-1-1zm-10 8c-.55 0-1 .45-1 1v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1zM5.64 7.05 4.22 5.64c-.39-.39-.39-1.03 0-1.41s1.03-.39 1.41 0l1.41 1.41c.39.39.39 1.03 0 1.41s-1.02.39-1.4 0zm11.31 9.9a.996.996 0 0 0 0 1.41l1.41 1.41c.39.39 1.03.39 1.41 0a.996.996 0 0 0 0-1.41l-1.41-1.41a.996.996 0 0 0-1.41 0zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm3.64 6.78 1.41-1.41c.39-.39.39-1.03 0-1.41s-1.03-.39-1.41 0l-1.41 1.41a.996.996 0 0 0 0 1.41c.38.39 1.02.39 1.41 0zM12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6z"></path></svg> </div><div>${
-                      a["hourly"]["temperature_2m"][
-                        keepingCounttNightindex[weekDayC]
-                      ]
-                    } ${
-                      a["hourly_units"]["temperature_2m"]
-                    } <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1.5em" width="100%" xmlns="http://www.w3.org/2000/svg"><path d="M283.211 512c78.962 0 151.079-35.925 198.857-94.792 7.068-8.708-.639-21.43-11.562-19.35-124.203 23.654-238.262-71.576-238.262-196.954 0-72.222 38.662-138.635 101.498-174.394 9.686-5.512 7.25-20.197-3.756-22.23A258.156 258.156 0 0 0 283.211 0c-141.309 0-256 114.511-256 256 0 141.309 114.511 256 256 256z"></path></svg> </div>`;
-                    wdiv.appendChild(wp);
-                    if (month.toString().length < 2) {
-                      wp.innerHTML = `Today: <h5>0${month}-${day + weekDayC}</h5>`;
-                    } else {
-                      wp.innerHTML = `Today: <h5> ${month}-${day + weekDayC} </h5>`;
-                    }
-                    wdiv.appendChild(tempchild);
-                    Wweek.appendChild(wdiv);
-                    weekDayC++;
+                keepingCountt = a["hourly"]["time"].findIndex(t => t.startsWith(dateCheck + "12:00"));
               }
-            } else {
-                          let wdiv = document.createElement("div");
-                          wdiv.setAttribute("class", "wdivs");
-                          let keepingCountt = a["hourly"]["time"].indexOf(
-                            `${year}-0${month}-${day + weekDayC}T${12}:00`
-                          );
-                          let keepingCounttNight = a["hourly"]["time"].indexOf(
-                            `${year}-0${month}-${day + weekDayC}T${23}:00`
-                          );
-                          let newday = new Date(`${year}-0${month}-${day + weekDayC}`);
-                          let wp = document.createElement("h3");
-                      if (keepingCountt === -1) {
-
-                            
-                            newday = new Date(`${year}-0${month }-${day + weekDayC}`);
-                            console.log(newday)
-                            keepingCountt = a["hourly"]["time"].indexOf(
-                              `${year}-0${month}-0${day + weekDayC}T${12}:00`
-                            );
-                           
-                            keepingCounttNight = a["hourly"]["time"].indexOf(
-                              `${year}-0${month }-${day + weekDayC}T${23}:00`
-                            );
-                            if (keepingCounttNight === -1) {
-                              keepingCounttNight = a["hourly"]["time"].indexOf(
-                                `${year}-0${month }-0${day + weekDayC}T${23}:00`
-                              );
-                              console.log(day + weekDayC+ 1)
-                             
-                            }
-                            // console.log(keepingCounttNightindex);
-
-                            keepCountindex.push(keepingCountt);
-                            keepingCounttNightindex.push(keepingCounttNight);
-                            let tempchild = document.createElement("div");
-                          
-                            tempchild.innerHTML = tempchild.innerHTML = `<div>${
-                              a["hourly"]["temperature_2m"][keepCountindex[weekDayC]]
-                            } ${
-                              a["hourly_units"]["temperature_2m"]
-                            } <svg stroke="currentColor" fill="yellow" stroke-width="0" viewBox="0 0 24 24" height="2em" width="100%" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"></path><path d="M11 4V2c0-.55.45-1 1-1s1 .45 1 1v2c0 .55-.45 1-1 1s-1-.45-1-1zm7.36 3.05 1.41-1.42a.996.996 0 1 0-1.41-1.41l-1.41 1.42a.996.996 0 1 0 1.41 1.41zM22 11h-2c-.55 0-1 .45-1 1s.45 1 1 1h2c.55 0 1-.45 1-1s-.45-1-1-1zm-10 8c-.55 0-1 .45-1 1v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1zM5.64 7.05 4.22 5.64c-.39-.39-.39-1.03 0-1.41s1.03-.39 1.41 0l1.41 1.41c.39.39.39 1.03 0 1.41s-1.02.39-1.4 0zm11.31 9.9a.996.996 0 0 0 0 1.41l1.41 1.41c.39.39 1.03.39 1.41 0a.996.996 0 0 0 0-1.41l-1.41-1.41a.996.996 0 0 0-1.41 0zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm3.64 6.78 1.41-1.41c.39-.39.39-1.03 0-1.41s-1.03-.39-1.41 0l-1.41 1.41a.996.996 0 0 0 0 1.41c.38.39 1.02.39 1.41 0zM12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6z"></path></svg> </div><div>${
-                              a["hourly"]["temperature_2m"][
-                                keepCountindex[weekDayC]+12
-                              ]
-                              
-                            } ${
-                              a["hourly_units"]["temperature_2m"]
-                            } <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1.5em" width="100%" xmlns="http://www.w3.org/2000/svg"><path d="M283.211 512c78.962 0 151.079-35.925 198.857-94.792 7.068-8.708-.639-21.43-11.562-19.35-124.203 23.654-238.262-71.576-238.262-196.954 0-72.222 38.662-138.635 101.498-174.394 9.686-5.512 7.25-20.197-3.756-22.23A258.156 258.156 0 0 0 283.211 0c-141.309 0-256 114.511-256 256 0 141.309 114.511 256 256 256z"></path></svg> </div>`;
-                            console.log(                              a["hourly"]["temperature_2m"][
-                                keepCountindex[weekDayC]
-                              ])
-                            wdiv.appendChild(wp);
-                            if (month.toString().length < 2) {
-                              if (newday.getDay()+ 1 > 7) {
-                                wp.innerHTML = `${daysOfTheWeek[0]}: <h5>0${
-                                month
-                              }-${day + weekDayC}</h5>`;
-                                
-                              } else {
-                                wp.innerHTML = `${daysOfTheWeek[(newday.getDay()) % 7] }: <h5>0${
-                                month
-                              }-${day + weekDayC}</h5>`;
-                              
-                              }
-                              console.log(daysOfTheWeek[(newday.getDay()) % 7])
-                              
-
-                            } else {
-                                if (newday.getDay()+ 1 > 7) {
-                                wp.innerHTML = `${daysOfTheWeek[0]}: <h5>0${
-                                month
-                              }-${day + weekDayC}</h5>`;
-                                
-                              } else {
-                                  wp.innerHTML = `${daysOfTheWeek[(newday.getDay()) % 7] }: <h5>0${
-                                  month
-                                }-${day + weekDayC}</h5>`;
-
-                              }
-
-                            }
-                            wdiv.appendChild(tempchild);
-                            Wweek.appendChild(wdiv);
-                            weekDayC++;
-                      } else {
-                            
-
-                            keepCountindex.push(keepingCountt);
-                            keepingCounttNightindex.push(keepingCounttNight);
-                            let tempchild = document.createElement("div");
-                            tempchild.innerHTML = tempchild.innerHTML = `<div>${
-                              a["hourly"]["temperature_2m"][keepCountindex[weekDayC]]
-                            } ${
-                              a["hourly_units"]["temperature_2m"]
-                            } <svg stroke="currentColor" fill="yellow" stroke-width="0" viewBox="0 0 24 24" height="2em" width="100%" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"></path><path d="M11 4V2c0-.55.45-1 1-1s1 .45 1 1v2c0 .55-.45 1-1 1s-1-.45-1-1zm7.36 3.05 1.41-1.42a.996.996 0 1 0-1.41-1.41l-1.41 1.42a.996.996 0 1 0 1.41 1.41zM22 11h-2c-.55 0-1 .45-1 1s.45 1 1 1h2c.55 0 1-.45 1-1s-.45-1-1-1zm-10 8c-.55 0-1 .45-1 1v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1zM5.64 7.05 4.22 5.64c-.39-.39-.39-1.03 0-1.41s1.03-.39 1.41 0l1.41 1.41c.39.39.39 1.03 0 1.41s-1.02.39-1.4 0zm11.31 9.9a.996.996 0 0 0 0 1.41l1.41 1.41c.39.39 1.03.39 1.41 0a.996.996 0 0 0 0-1.41l-1.41-1.41a.996.996 0 0 0-1.41 0zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm3.64 6.78 1.41-1.41c.39-.39.39-1.03 0-1.41s-1.03-.39-1.41 0l-1.41 1.41a.996.996 0 0 0 0 1.41c.38.39 1.02.39 1.41 0zM12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6z"></path></svg> </div><div>${
-                              a["hourly"]["temperature_2m"][
-                                keepingCounttNightindex[weekDayC]
-                              ]
-                            } ${
-                              a["hourly_units"]["temperature_2m"]
-                            } <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1.5em" width="100%" xmlns="http://www.w3.org/2000/svg"><path d="M283.211 512c78.962 0 151.079-35.925 198.857-94.792 7.068-8.708-.639-21.43-11.562-19.35-124.203 23.654-238.262-71.576-238.262-196.954 0-72.222 38.662-138.635 101.498-174.394 9.686-5.512 7.25-20.197-3.756-22.23A258.156 258.156 0 0 0 283.211 0c-141.309 0-256 114.511-256 256 0 141.309 114.511 256 256 256z"></path></svg> </div>`;
-                            wdiv.appendChild(wp);
-                            if (month.toString().length < 2) {
-                              wp.innerHTML = `${
-                                daysOfTheWeek[newday.getDay()]
-                              }: <h5>0${month}-${day + weekDayC}</h5>`;
-                            } else {
-                              wp.innerHTML = `${
-                                daysOfTheWeek[newday.getDay()]
-                              }: <h5> ${month}-${day + weekDayC} </h5>`;
-                            }
-                          
-                            wdiv.appendChild(tempchild);
-                            Wweek.appendChild(wdiv);
-                            weekDayC++;
-                          }
-                          console.log(daysOfTheWeek[newday.getDay()])
-                }
+              if (keepingCounttNight === -1) {
+                keepingCounttNight = a["hourly"]["time"].findIndex(t => t.startsWith(dateCheck + "23:00"));
+              }
+            }
+            
+            keepCountindex.push(keepingCountt);
+            keepingCounttNightindex.push(keepingCounttNight);
+            
+            let tempchild = document.createElement("div");
+            if (keepingCountt !== -1 && keepingCounttNight !== -1) {
+              tempchild.innerHTML = `<div>${
+                a["hourly"]["temperature_2m"][keepingCountt]
+              } ${
+                a["hourly_units"]["temperature_2m"]
+              } <svg stroke="currentColor" fill="yellow" stroke-width="0" viewBox="0 0 24 24" height="2em" width="100%" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"></path><path d="M11 4V2c0-.55.45-1 1-1s1 .45 1 1v2c0 .55-.45 1-1 1s-1-.45-1-1zm7.36 3.05 1.41-1.42a.996.996 0 1 0-1.41-1.41l-1.41 1.42a.996.996 0 1 0 1.41 1.41zM22 11h-2c-.55 0-1 .45-1 1s.45 1 1 1h2c.55 0 1-.45 1-1s-.45-1-1-1zm-10 8c-.55 0-1 .45-1 1v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1zM5.64 7.05 4.22 5.64c-.39-.39-.39-1.03 0-1.41s1.03-.39 1.41 0l1.41 1.41c.39.39.39 1.03 0 1.41s-1.02.39-1.4 0zm11.31 9.9a.996.996 0 0 0 0 1.41l1.41 1.41c.39.39 1.03.39 1.41 0a.996.996 0 0 0 0-1.41l-1.41-1.41a.996.996 0 0 0-1.41 0zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm3.64 6.78 1.41-1.41c.39-.39.39-1.03 0-1.41s-1.03-.39-1.41 0l-1.41 1.41a.996.996 0 0 0 0 1.41c.38.39 1.02.39 1.41 0zM12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6z"></path></svg> </div><div>${
+                a["hourly"]["temperature_2m"][keepingCounttNight]
+              } ${
+                a["hourly_units"]["temperature_2m"]
+              } <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1.5em" width="100%" xmlns="http://www.w3.org/2000/svg"><path d="M283.211 512c78.962 0 151.079-35.925 198.857-94.792 7.068-8.708-.639-21.43-11.562-19.35-124.203 23.654-238.262-71.576-238.262-196.954 0-72.222 38.662-138.635 101.498-174.394 9.686-5.512 7.25-20.197-3.756-22.23A258.156 258.156 0 0 0 283.211 0c-141.309 0-256 114.511-256 256 0 141.309 114.511 256 256 256z"></path></svg> </div>`;
+            }
+            
+            let labelText = weekDayC === 0 ? "Today" : "Tomorrow";
+            wp.innerHTML = `${labelText}: <h5>${dateObj.monthStr}-${dateObj.dayStr}</h5>`;
+            
+            wdiv.appendChild(wp);
+            wdiv.appendChild(tempchild);
+            Wweek.appendChild(wdiv);
+            weekDayC++;
           } else {
             return;
           }
-
-          // console.log(keepCountindex);
         }
       }
     } else {
